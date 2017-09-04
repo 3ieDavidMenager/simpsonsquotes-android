@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="blue">#3F51B5</color>
+    <color name="dark_blue">#303F9F</color>
+    <color name="pink">#FF4081</color>
+
+    <color name="wtw">#FFFFFF</color>
+    <color name="btb">#000000</color>
+</resources>

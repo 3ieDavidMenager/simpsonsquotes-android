@@ -1,0 +1,9 @@
+<resources>
+    <!-- Google analytics -->
+    <string name="analytics_screen_example">ExampleScreen</string>
+
+    <string name="analytics_event_default_label">n/a</string>
+
+    <string name="analytics_event_example_category">@string/analytics_screen_example</string>
+    <string name="analytics_event_example_action">Show comments</string>
+</resources>

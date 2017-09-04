@@ -1,0 +1,7 @@
+<resources>
+
+    <!-- Activity main -->
+    <string name="openDrawer">Drawer open</string>
+    <string name="closeDrawer">Drawer close</string>
+
+</resources>
