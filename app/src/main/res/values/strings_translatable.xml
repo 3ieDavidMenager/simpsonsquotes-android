@@ -4,4 +4,7 @@
     <string name="openDrawer">Drawer open</string>
     <string name="closeDrawer">Drawer close</string>
 
+    <!-- Fragment main -->
+    <string name="search_hint">Enter your search</string>
+
 </resources>
