@@ -8,4 +8,9 @@ public class SearchController extends Controller
     {
 
     }
+
+    public void getSearchResponse()
+    {
+
+    }
 }

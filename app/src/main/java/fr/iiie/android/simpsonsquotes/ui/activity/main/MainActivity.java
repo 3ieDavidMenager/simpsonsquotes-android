@@ -27,6 +27,7 @@ import fr.iiie.android.simpsonsquotes.bus.SwitchFragmentEvent;
 import fr.iiie.android.simpsonsquotes.data.app.App;
 import fr.iiie.android.simpsonsquotes.business.main.MainController;
 import fr.iiie.android.simpsonsquotes.ui.fragment.sample.SampleFragment;
+import fr.iiie.android.simpsonsquotes.ui.fragment.search.SearchFragment;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -94,11 +95,11 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        if (getSupportFragmentManager().findFragmentByTag("sample") == null)
+        if (getSupportFragmentManager().findFragmentByTag("search") == null)
         {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.activity_main_container, new SampleFragment(), "sample")
+                    .replace(R.id.activity_main_container, new SearchFragment(), "search")
                     .commit();
         }
     }

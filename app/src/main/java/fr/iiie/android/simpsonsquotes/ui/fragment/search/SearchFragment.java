@@ -1,13 +1,15 @@
 package fr.iiie.android.simpsonsquotes.ui.fragment.search;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
+import butterknife.OnEditorAction;
 import fr.iiie.android.simpsonsquotes.R;
 import fr.iiie.android.simpsonsquotes.business.search.SearchController;
 import fr.iiie.android.simpsonsquotes.data.app.App;
@@ -16,6 +18,17 @@ public class SearchFragment extends Fragment
 {
 
     private SearchController searchController;
+
+    @OnEditorAction(R.id.fragment_search_editText)
+    protected boolean onSearchEnter(int actionId)
+    {
+        if (actionId == KeyEvent.ACTION_DOWN)
+        {
+            searchController.getSearchResponse();
+            return true;
+        }
+        return false;
+    }
 
     public SearchFragment()
     {
@@ -26,7 +39,7 @@ public class SearchFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState)
     {
-        final View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_search, container, false);
         ButterKnife.bind(this, rootView);
         searchController = new SearchController();
 

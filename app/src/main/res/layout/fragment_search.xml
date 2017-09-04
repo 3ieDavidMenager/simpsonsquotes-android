@@ -4,6 +4,7 @@
     android:layout_height="match_parent">
 
     <EditText
+        android:id="@+id/fragment_search_editText"
         android:hint="@string/search_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
