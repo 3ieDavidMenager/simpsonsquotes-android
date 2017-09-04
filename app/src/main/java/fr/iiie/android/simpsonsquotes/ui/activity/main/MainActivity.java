@@ -26,7 +26,6 @@ import fr.iiie.android.simpsonsquotes.bus.SnackEvent;
 import fr.iiie.android.simpsonsquotes.bus.SwitchFragmentEvent;
 import fr.iiie.android.simpsonsquotes.data.app.App;
 import fr.iiie.android.simpsonsquotes.business.main.MainController;
-import fr.iiie.android.simpsonsquotes.ui.fragment.sample.SampleFragment;
 import fr.iiie.android.simpsonsquotes.ui.fragment.search.SearchFragment;
 
 public class MainActivity extends AppCompatActivity

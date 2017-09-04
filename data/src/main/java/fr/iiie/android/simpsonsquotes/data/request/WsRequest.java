@@ -35,7 +35,7 @@ public class WsRequest
     {
         if (App.isConnected())
         {
-            App.getRestClient().getApiService().getWsResponse().enqueue(wsResponseCallback);
+            //App.getRestClient().getApiService().getWsResponse().enqueue(wsResponseCallback);
         }
         else
         {

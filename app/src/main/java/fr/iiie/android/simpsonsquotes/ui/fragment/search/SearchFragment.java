@@ -7,7 +7,9 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnEditorAction;
 import fr.iiie.android.simpsonsquotes.R;
@@ -16,6 +18,8 @@ import fr.iiie.android.simpsonsquotes.data.app.App;
 
 public class SearchFragment extends Fragment
 {
+    @BindView(R.id.fragment_search_editText)
+    EditText search;
 
     private SearchController searchController;
 
@@ -24,7 +28,7 @@ public class SearchFragment extends Fragment
     {
         if (actionId == KeyEvent.ACTION_DOWN)
         {
-            searchController.getSearchResponse();
+            searchController.getSearchResponse(search.getText().toString());
             return true;
         }
         return false;

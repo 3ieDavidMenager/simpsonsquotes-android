@@ -1,6 +1,6 @@
 <resources>
 
     <string name="app_name" translatable="false">SimpsonsQuotes</string>
-    <string name="ws_endpoint_url" translatable="false">http://jsonplaceholder.typicode.com/</string>
+    <string name="ws_endpoint_url" translatable="false"> https://frinkiac.com/api/</string>
     <string name="auth_header" translatable="false">X-USER-TOKEN</string>
 </resources>
