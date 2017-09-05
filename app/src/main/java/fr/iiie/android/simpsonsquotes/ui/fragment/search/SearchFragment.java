@@ -95,7 +95,7 @@ public class SearchFragment extends Fragment
     {
         if (event.getMyQuoteResultsListModel() != null)
         {
-            for (QuoteResultModel quote : event.getMyQuoteResultsListModel())
+            for (final QuoteResultModel quote : event.getMyQuoteResultsListModel())
             {
                 TableRow tableRow = new TableRow(getContext());
                 tableRow.setLayoutParams(resultsTableLayout.getLayoutParams());
@@ -108,10 +108,10 @@ public class SearchFragment extends Fragment
                 TextView id_textView = new TextView(getContext());
                 id_textView.setLayoutParams(params);
                 id_textView.setGravity(Gravity.CENTER);
-                String quote_id = Integer.toString(quote.getId());
+                final String quote_id = Integer.toString(quote.getId());
                 id_textView.setText(quote_id);
 
-                TextView episode_textView = new TextView(getContext());
+                final TextView episode_textView = new TextView(getContext());
                 episode_textView.setLayoutParams(params);
                 episode_textView.setGravity(Gravity.CENTER);
                 episode_textView.setText(quote.getEpisode());
@@ -119,7 +119,7 @@ public class SearchFragment extends Fragment
                 TextView timestamp_textView = new TextView(getContext());
                 timestamp_textView.setLayoutParams(params);
                 timestamp_textView.setGravity(Gravity.CENTER);
-                String quote_timestamp = Integer.toString(quote.getTimestamp());
+                final String quote_timestamp = Integer.toString(quote.getTimestamp());
                 timestamp_textView.setText(quote_timestamp);
 
                 ImageView small_imageView = new ImageView(getContext());
@@ -137,7 +137,13 @@ public class SearchFragment extends Fragment
                     @Override
                     public void onClick(View v)
                     {
-                        App.getAppBus().post(new SwitchFragmentEvent(new DetailsFragment(), SwitchFragmentEvent.Direction.ALPHA, true, false, false));
+                        Bundle bundle = new Bundle();
+                        bundle.putString("id", quote_id);
+                        bundle.putString("episode", quote.getEpisode());
+                        bundle.putString("timestamp", quote_timestamp);
+                        DetailsFragment detailsFragment = new DetailsFragment();
+                        detailsFragment.setArguments(bundle);
+                        App.getAppBus().post(new SwitchFragmentEvent(detailsFragment, SwitchFragmentEvent.Direction.ALPHA, true, true, false));
                     }
                 });
 
