@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -31,16 +32,20 @@ import fr.iiie.android.simpsonsquotes.data.app.App;
 import fr.iiie.android.simpsonsquotes.data.bus.SearchDataReadyEvent;
 import fr.iiie.android.simpsonsquotes.data.model.QuoteSearchModel;
 import fr.iiie.android.simpsonsquotes.ui.fragment.details.DetailsFragment;
+import fr.iiie.android.simpsonsquotes.ui.fragment.random.RandomFragment;
 
 public class SearchFragment extends Fragment
 {
     @BindView(R.id.fragment_search_editText)
     EditText searchEditText;
 
-    @OnClick(R.id.fragment_search_randomButton)
-    private void onRandomButtonClick()
-    {
+    @BindView(R.id.fragment_search_progressBar)
+    ProgressBar searchProgressBar;
 
+    @OnClick(R.id.fragment_search_randomButton)
+    public void onRandomButtonClick()
+    {
+        App.getAppBus().post(new SwitchFragmentEvent(new RandomFragment(), SwitchFragmentEvent.Direction.ALPHA, true, true, false));
     }
 
     @BindView(R.id.fragment_search_tableLayout)
@@ -53,6 +58,7 @@ public class SearchFragment extends Fragment
     {
         if (actionId == KeyEvent.ACTION_DOWN)
         {
+            searchProgressBar.setVisibility(View.VISIBLE);
             searchController.getSearchResponse(searchEditText.getText().toString());
             return true;
         }
@@ -102,6 +108,7 @@ public class SearchFragment extends Fragment
     {
         if (event.getMyQuoteResultsListModel() != null)
         {
+            resultsTableLayout.setVisibility(View.VISIBLE);
             for (final QuoteSearchModel quote : event.getMyQuoteResultsListModel())
             {
                 TableRow tableRow = new TableRow(getContext());
@@ -156,9 +163,11 @@ public class SearchFragment extends Fragment
 
                 resultsTableLayout.addView(tableRow);
             }
+            searchProgressBar.setVisibility(View.GONE);
         } else
         {
             App.getAppBus().post(new SnackEvent("Error or no network"));
+            searchProgressBar.setVisibility(View.GONE);
         }
     }
 }

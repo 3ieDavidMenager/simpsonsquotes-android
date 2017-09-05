@@ -1,3 +1,4 @@
 <resources>
-
+    <string name="large_image">Large image</string>
+    <string name="image">Image</string>
 </resources>

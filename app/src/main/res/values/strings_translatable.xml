@@ -4,7 +4,15 @@
     <string name="openDrawer">Drawer open</string>
     <string name="closeDrawer">Drawer close</string>
 
-    <!-- Fragment main -->
+    <!-- Fragment search -->
     <string name="search_hint">Enter your search</string>
+
+    <!-- Fragment details -->
+    <string name="id">Id</string>
+    <string name="episode">Episode</string>
+    <string name="timestamp">Timestamp</string>
+
+    <!-- Fragment search -->
+    <string name="random">Random</string>
 
 </resources>

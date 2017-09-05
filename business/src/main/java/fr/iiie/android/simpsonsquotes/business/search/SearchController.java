@@ -12,7 +12,7 @@ public class SearchController extends Controller
 {
     public SearchController()
     {
-
+        //Mandatory constructor
     }
 
     public void getSearchResponse(String query)

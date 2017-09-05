@@ -7,6 +7,7 @@ import java.util.List;
 
 public class RandomQuoteModel
 {
+    @Expose
     @SerializedName("Episode")
     Episode episode;
 
@@ -22,7 +23,27 @@ public class RandomQuoteModel
     @SerializedName("Nearby")
     List<QuoteSearchModel> nearby;
 
-    private class Subtitles
+    public Episode getEpisode()
+    {
+        return episode;
+    }
+
+    public QuoteSearchModel getFrame()
+    {
+        return frame;
+    }
+
+    public List<Subtitles> getSubtitles()
+    {
+        return subtitles;
+    }
+
+    public List<QuoteSearchModel> getNearby()
+    {
+        return nearby;
+    }
+
+    public class Subtitles
     {
         @Expose
         @SerializedName("Id")
@@ -52,9 +73,43 @@ public class RandomQuoteModel
         @SerializedName("Language")
         String language;
 
+        public int getId()
+        {
+            return id;
+        }
+
+        public int getRepresentativeTimeStamp()
+        {
+            return representativeTimeStamp;
+        }
+
+        public String getEpisode()
+        {
+            return episode;
+        }
+
+        public int getStartTimeStamp()
+        {
+            return startTimeStamp;
+        }
+
+        public int getEndTimeStamp()
+        {
+            return endTimeStamp;
+        }
+
+        public String getContent()
+        {
+            return content;
+        }
+
+        public String getLanguage()
+        {
+            return language;
+        }
     }
 
-    private class Episode
+    public class Episode
     {
         @Expose
         @SerializedName("Id")

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -27,7 +28,10 @@ public class DetailsFragment extends Fragment
     TextView timestampText;
 
     @BindView(R.id.fragment_details_largeImage)
-    ImageView largeImage;
+    ImageView episodeLargeImage;
+
+    @BindView(R.id.fragment_details_progressBar)
+    ProgressBar detailsProgressBar;
 
     @Nullable
     @Override
@@ -37,16 +41,17 @@ public class DetailsFragment extends Fragment
 
         ButterKnife.bind(this, rootView);
 
-        String episode = this.getArguments().getString("episode");
-        String timestamp = this.getArguments().getString("timestamp");
-        String id = this.getArguments().getString("id");
+        String episode = getString(R.string.episode) + ": " + this.getArguments().getString("episode");
+        String timestamp = getString(R.string.timestamp) + ": " + this.getArguments().getString("timestamp");
+        String id = getString(R.string.id) + ": " + this.getArguments().getString("id");
+        episodeText.setText(episode);
+        timestampText.setText(timestamp);
+        idText.setText(id);
 
-        episodeText.setText("Episode: " + episode);
-        timestampText.setText("Timestamp" + timestamp);
-        idText.setText("Id: " + id);
+        String image_url = "https://frinkiac.com/img/" + this.getArguments().getString("episode") + "/" + this.getArguments().getString("timestamp") + "/large.jpg";
+        Glide.with(this).load(image_url).into(episodeLargeImage);
 
-        String image_url = "https://frinkiac.com/img/" + episode + "/" + timestamp + "/large.jpg";
-        Glide.with(this).load(image_url).into(largeImage);
+        detailsProgressBar.setVisibility(View.GONE);
         return rootView;
     }
 }
