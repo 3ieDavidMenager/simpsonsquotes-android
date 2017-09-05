@@ -3,7 +3,6 @@ package fr.iiie.android.simpsonsquotes.data.network.rest.service;
 import java.util.List;
 
 import fr.iiie.android.simpsonsquotes.data.model.QuoteResultModel;
-// TODO remove unused imports
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;

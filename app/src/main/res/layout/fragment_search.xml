@@ -2,23 +2,20 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- TODO views in constraint layout should have at least one vertical constraint and one horizontal -->
-    <!-- TODO 3ie naming convention : location_short-type_name[_other...] -> fragment_search_edit_texttosearch -->
     <EditText
         android:id="@+id/fragment_search_editText"
-        android:hint="@string/search_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="@string/search_hint"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ScrollView
         android:layout_width="359dp"

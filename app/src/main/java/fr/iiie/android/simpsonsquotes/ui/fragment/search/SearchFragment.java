@@ -31,12 +31,11 @@ import fr.iiie.android.simpsonsquotes.data.model.QuoteResultModel;
 
 public class SearchFragment extends Fragment
 {
-    // TODO 3ie naminng convention : meaningful name + suffix with classname -> searchEdittext
     @BindView(R.id.fragment_search_editText)
-    EditText search;
+    EditText searchEditText;
 
     @BindView(R.id.fragment_search_tableLayout)
-    TableLayout tableLayout;
+    TableLayout resultsTableLayout;
 
     private SearchController searchController;
 
@@ -45,7 +44,7 @@ public class SearchFragment extends Fragment
     {
         if (actionId == KeyEvent.ACTION_DOWN)
         {
-            searchController.getSearchResponse(search.getText().toString());
+            searchController.getSearchResponse(searchEditText.getText().toString());
             return true;
         }
         return false;
@@ -53,7 +52,7 @@ public class SearchFragment extends Fragment
 
     public SearchFragment()
     {
-        // TODO When adding the "mandatory" empty constructor, do not leave it empty, put in a comment
+        //Mandatory constructor
     }
 
     @Nullable
@@ -97,10 +96,10 @@ public class SearchFragment extends Fragment
             for (QuoteResultModel quote : event.getMyQuoteResultsListModel())
             {
                 TableRow tableRow = new TableRow(getContext());
-                tableRow.setLayoutParams(tableLayout.getLayoutParams());
+                tableRow.setLayoutParams(resultsTableLayout.getLayoutParams());
 
                 TableRow.LayoutParams params = new TableRow.LayoutParams(
-                        tableLayout.getWidth() / 4,
+                        resultsTableLayout.getWidth() / 4,
                         TableRow.LayoutParams.WRAP_CONTENT
                 );
 
@@ -131,10 +130,9 @@ public class SearchFragment extends Fragment
                 tableRow.addView(timestamp_textView);
                 tableRow.addView(small_imageView);
 
-                tableLayout.addView(tableRow);
+                resultsTableLayout.addView(tableRow);
             }
-        }
-        else
+        } else
         {
             App.getAppBus().post(new SnackEvent("Error or no network"));
         }

@@ -21,7 +21,6 @@ public class SearchRequest
             if (response.code() == 200)
             {
                 App.getCoreBus().post(new SearchDataReadyEvent(response.body()));
-                // TODO use TODO when adding TODOs xD
             }
         }
 
