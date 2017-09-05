@@ -9,12 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import org.greenrobot.eventbus.Subscribe;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnEditorAction;
 import fr.iiie.android.simpsonsquotes.R;
+import fr.iiie.android.simpsonsquotes.bus.SnackEvent;
 import fr.iiie.android.simpsonsquotes.business.search.SearchController;
 import fr.iiie.android.simpsonsquotes.data.app.App;
+import fr.iiie.android.simpsonsquotes.data.bus.SearchDataReadyEvent;
 
 public class SearchFragment extends Fragment
 {
@@ -58,7 +62,7 @@ public class SearchFragment extends Fragment
         searchController.resume();
         if (!App.getAppBus().isRegistered(this))
         {
-            //App.getAppBus().register(this);
+            App.getAppBus().register(this);
         }
     }
 
@@ -71,5 +75,18 @@ public class SearchFragment extends Fragment
             App.getAppBus().unregister(this);
         }
         super.onPause();
+    }
+
+    @Subscribe
+    public void onSearchDataReadyEvent(SearchDataReadyEvent event)
+    {
+        if (event.getMyQuoteResultsList() != null)
+        {
+            App.getAppBus().post(new SnackEvent("Response is ok, size is : " + event.getMyQuoteResultsList().size()));
+        }
+        else
+        {
+            App.getAppBus().post(new SnackEvent("Error or no network"));
+        }
     }
 }

@@ -5,6 +5,7 @@ import com.activeandroid.util.Log;
 import java.util.List;
 
 import fr.iiie.android.simpsonsquotes.data.app.App;
+import fr.iiie.android.simpsonsquotes.data.bus.SearchDataReadyEvent;
 import fr.iiie.android.simpsonsquotes.data.model.QuoteResult;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,14 +22,14 @@ public class SearchRequest
         {
             if (response.code() == 200)
             {
-                //Handle bus
+                App.getCoreBus().post(new SearchDataReadyEvent(response.body()));
             }
         }
 
         @Override
         public void onFailure(Call<List<QuoteResult>> call, Throwable t)
         {
-
+            App.getCoreBus().post(new SearchDataReadyEvent(null));
         }
     };
 
@@ -37,6 +38,10 @@ public class SearchRequest
         if (App.isConnected())
         {
             App.getRestClient().getApiService().getSearchResponse(query).enqueue(searchResponseCallback);
+        }
+        else
+        {
+            App.getCoreBus().post(new SearchDataReadyEvent(null));
         }
     }
 
