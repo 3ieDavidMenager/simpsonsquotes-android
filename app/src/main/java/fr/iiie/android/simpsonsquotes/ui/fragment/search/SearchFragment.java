@@ -1,8 +1,8 @@
 package fr.iiie.android.simpsonsquotes.ui.fragment.search;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +18,7 @@ import fr.iiie.android.simpsonsquotes.data.app.App;
 
 public class SearchFragment extends Fragment
 {
+    // TODO 3ie naminng convention : meaningful name + suffix with classname -> searchEdittext
     @BindView(R.id.fragment_search_editText)
     EditText search;
 
@@ -36,7 +37,7 @@ public class SearchFragment extends Fragment
 
     public SearchFragment()
     {
-
+        // TODO When adding the "mandatory" empty constructor, do not leave it empty, put in a comment
     }
 
     @Nullable
@@ -49,7 +50,6 @@ public class SearchFragment extends Fragment
 
         return rootView;
     }
-
 
     @Override
     public void onResume()

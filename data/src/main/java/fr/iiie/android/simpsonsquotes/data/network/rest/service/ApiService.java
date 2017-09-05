@@ -2,6 +2,7 @@ package fr.iiie.android.simpsonsquotes.data.network.rest.service;
 
 import java.util.List;
 
+// TODO remove unused imports
 import fr.iiie.android.simpsonsquotes.data.model.MyCustomModel;
 import fr.iiie.android.simpsonsquotes.data.model.QuoteResult;
 import retrofit2.Call;
