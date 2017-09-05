@@ -1,5 +1,6 @@
 package fr.iiie.android.simpsonsquotes.ui.fragment.search;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.Gravity;
@@ -124,21 +125,29 @@ public class SearchFragment extends Fragment
         id_textView.setLayoutParams(params);
         id_textView.setGravity(Gravity.CENTER);
         id_textView.setText(getString(R.string.id));
+        id_textView.setPadding(0, 10, 0, 10);
+        id_textView.setTypeface(null, Typeface.BOLD);
 
         TextView episode_textView = new TextView(getContext());
         episode_textView.setLayoutParams(params);
         episode_textView.setGravity(Gravity.CENTER);
         episode_textView.setText(getString(R.string.episode));
+        episode_textView.setPadding(0, 10, 0, 10);
+        episode_textView.setTypeface(null, Typeface.BOLD);
 
         TextView timestamp_textView = new TextView(getContext());
         timestamp_textView.setLayoutParams(params);
         timestamp_textView.setGravity(Gravity.CENTER);
         timestamp_textView.setText(getString(R.string.timestamp));
+        id_textView.setPadding(0, 10, 0, 10);
+        timestamp_textView.setTypeface(null, Typeface.BOLD);
 
         TextView image_textView = new TextView(getContext());
         image_textView.setLayoutParams(params);
         image_textView.setGravity(Gravity.CENTER);
         image_textView.setText(getString(R.string.image));
+        image_textView.setPadding(0, 10, 0, 10);
+        image_textView.setTypeface(null, Typeface.BOLD);
 
         tableRow.addView(id_textView);
         tableRow.addView(episode_textView);
@@ -172,17 +181,20 @@ public class SearchFragment extends Fragment
                 id_textView.setGravity(Gravity.CENTER);
                 final String quote_id = Integer.toString(quote.getId());
                 id_textView.setText(quote_id);
+                id_textView.setPadding(0, 20, 0, 20);
 
                 final TextView episode_textView = new TextView(getContext());
                 episode_textView.setLayoutParams(params);
                 episode_textView.setGravity(Gravity.CENTER);
                 episode_textView.setText(quote.getEpisode());
+                episode_textView.setPadding(0, 20, 0, 20);
 
                 TextView timestamp_textView = new TextView(getContext());
                 timestamp_textView.setLayoutParams(params);
                 timestamp_textView.setGravity(Gravity.CENTER);
                 final String quote_timestamp = Integer.toString(quote.getTimestamp());
                 timestamp_textView.setText(quote_timestamp);
+                timestamp_textView.setPadding(0, 20, 0, 20);
 
                 ImageView small_imageView = new ImageView(getContext());
                 small_imageView.setLayoutParams(params);
@@ -193,6 +205,8 @@ public class SearchFragment extends Fragment
                 tableRow.addView(episode_textView);
                 tableRow.addView(timestamp_textView);
                 tableRow.addView(small_imageView);
+
+                tableRow.setPadding(0, 20, 0, 20);
 
                 tableRow.setOnClickListener(new View.OnClickListener()
                 {
