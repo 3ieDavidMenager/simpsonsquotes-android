@@ -110,12 +110,53 @@ public class SearchFragment extends Fragment
         super.onPause();
     }
 
+    private void setTableInfos()
+    {
+        TableRow tableRow = new TableRow(getContext());
+        tableRow.setLayoutParams(resultsTableLayout.getLayoutParams());
+
+        TableRow.LayoutParams params = new TableRow.LayoutParams(
+                resultsTableLayout.getWidth() / 4,
+                TableRow.LayoutParams.WRAP_CONTENT
+        );
+
+        TextView id_textView = new TextView(getContext());
+        id_textView.setLayoutParams(params);
+        id_textView.setGravity(Gravity.CENTER);
+        id_textView.setText(getString(R.string.id));
+
+        TextView episode_textView = new TextView(getContext());
+        episode_textView.setLayoutParams(params);
+        episode_textView.setGravity(Gravity.CENTER);
+        episode_textView.setText(getString(R.string.episode));
+
+        TextView timestamp_textView = new TextView(getContext());
+        timestamp_textView.setLayoutParams(params);
+        timestamp_textView.setGravity(Gravity.CENTER);
+        timestamp_textView.setText(getString(R.string.timestamp));
+
+        TextView image_textView = new TextView(getContext());
+        image_textView.setLayoutParams(params);
+        image_textView.setGravity(Gravity.CENTER);
+        image_textView.setText(getString(R.string.image));
+
+        tableRow.addView(id_textView);
+        tableRow.addView(episode_textView);
+        tableRow.addView(timestamp_textView);
+        tableRow.addView(image_textView);
+
+        tableRow.setClickable(false);
+
+        resultsTableLayout.addView(tableRow);
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onSearchDataReadyEvent(SearchDataReadyEvent event)
     {
+        resultsTableLayout.removeAllViewsInLayout();
+        setTableInfos();
         if (event.getMyQuoteResultsListModel() != null)
         {
-            resultsTableLayout.setVisibility(View.VISIBLE);
             for (final QuoteSearchModel quote : event.getMyQuoteResultsListModel())
             {
                 TableRow tableRow = new TableRow(getContext());
