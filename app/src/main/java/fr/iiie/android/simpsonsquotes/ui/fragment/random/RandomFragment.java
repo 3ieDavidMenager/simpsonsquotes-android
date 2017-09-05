@@ -14,7 +14,9 @@ import com.bumptech.glide.Glide;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.parceler.Parcels;
 
+import java.io.Serializable;
 import java.util.List;
 
 import butterknife.BindView;
@@ -31,6 +33,8 @@ import fr.iiie.android.simpsonsquotes.data.request.SearchRequest;
 
 public class RandomFragment extends Fragment
 {
+
+    RandomDataReadyEvent event;
 
     private SearchController searchController;
 
@@ -60,10 +64,23 @@ public class RandomFragment extends Fragment
     {
         final View rootView = inflater.inflate(R.layout.fragment_random, container, false);
         ButterKnife.bind(this, rootView);
-        SearchRequest.getRandomQuote();
+        if (savedInstanceState == null)
+            SearchRequest.getRandomQuote();
+        else
+        {
+            RandomDataReadyEvent savedEvent = Parcels.unwrap(savedInstanceState.getParcelable("event"));
+            onRandomDataReadyEvent(savedEvent);
+        }
         searchController = new SearchController();
 
         return rootView;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState)
+    {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("event", Parcels.wrap(event));
     }
 
     @Override
@@ -93,6 +110,7 @@ public class RandomFragment extends Fragment
     {
         if (event.getRandomQuoteModel() != null)
         {
+            this.event = event;
             RandomQuoteModel response = event.getRandomQuoteModel();
             RandomQuoteModel.Episode episode = response.getEpisode();
             episodeTitleText.setText(episode.getTitle());

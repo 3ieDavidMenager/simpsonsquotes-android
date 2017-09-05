@@ -3,8 +3,11 @@ package fr.iiie.android.simpsonsquotes.data.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
 import java.util.List;
 
+@Parcel
 public class RandomQuoteModel
 {
     @Expose
@@ -43,7 +46,8 @@ public class RandomQuoteModel
         return nearby;
     }
 
-    public class Subtitles
+    @Parcel
+    public static class Subtitles
     {
         @Expose
         @SerializedName("Id")
@@ -109,7 +113,8 @@ public class RandomQuoteModel
         }
     }
 
-    public class Episode
+    @Parcel
+    public static class Episode
     {
         @Expose
         @SerializedName("Id")
