@@ -24,10 +24,12 @@ import butterknife.ButterKnife;
 import butterknife.OnEditorAction;
 import fr.iiie.android.simpsonsquotes.R;
 import fr.iiie.android.simpsonsquotes.bus.SnackEvent;
+import fr.iiie.android.simpsonsquotes.bus.SwitchFragmentEvent;
 import fr.iiie.android.simpsonsquotes.business.search.SearchController;
 import fr.iiie.android.simpsonsquotes.data.app.App;
 import fr.iiie.android.simpsonsquotes.data.bus.SearchDataReadyEvent;
 import fr.iiie.android.simpsonsquotes.data.model.QuoteResultModel;
+import fr.iiie.android.simpsonsquotes.ui.fragment.details.DetailsFragment;
 
 public class SearchFragment extends Fragment
 {
@@ -129,6 +131,15 @@ public class SearchFragment extends Fragment
                 tableRow.addView(episode_textView);
                 tableRow.addView(timestamp_textView);
                 tableRow.addView(small_imageView);
+
+                tableRow.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        App.getAppBus().post(new SwitchFragmentEvent(new DetailsFragment(), SwitchFragmentEvent.Direction.ALPHA, true, false, false));
+                    }
+                });
 
                 resultsTableLayout.addView(tableRow);
             }
