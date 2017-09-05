@@ -36,6 +36,8 @@ import fr.iiie.android.simpsonsquotes.ui.fragment.random.RandomFragment;
 
 public class SearchFragment extends Fragment
 {
+    static SearchDataReadyEvent event;
+
     @BindView(R.id.fragment_search_editText)
     EditText searchEditText;
 
@@ -86,6 +88,11 @@ public class SearchFragment extends Fragment
     {
         super.onResume();
         searchController.resume();
+        if (!searchEditText.getText().toString().equals(""))
+        {
+            searchProgressBar.setVisibility(View.VISIBLE);
+            searchController.getSearchResponse(searchEditText.getText().toString());
+        }
         if (!App.getAppBus().isRegistered(this))
         {
             App.getAppBus().register(this);
