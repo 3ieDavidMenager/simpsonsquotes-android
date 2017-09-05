@@ -3,8 +3,6 @@ package fr.iiie.android.simpsonsquotes.data.request;
 import java.util.List;
 
 import fr.iiie.android.simpsonsquotes.data.app.App;
-import fr.iiie.android.simpsonsquotes.data.bus.WsDataReadyEvent;
-import fr.iiie.android.simpsonsquotes.data.model.MyCustomModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

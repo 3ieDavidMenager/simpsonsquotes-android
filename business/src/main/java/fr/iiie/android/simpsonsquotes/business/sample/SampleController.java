@@ -3,7 +3,6 @@ package fr.iiie.android.simpsonsquotes.business.sample;
 import org.greenrobot.eventbus.Subscribe;
 
 import fr.iiie.android.simpsonsquotes.data.app.App;
-import fr.iiie.android.simpsonsquotes.data.bus.WsDataReadyEvent;
 import fr.iiie.android.simpsonsquotes.data.request.WsRequest;
 import fr.iiie.android.simpsonsquotes.business.Controller;
 

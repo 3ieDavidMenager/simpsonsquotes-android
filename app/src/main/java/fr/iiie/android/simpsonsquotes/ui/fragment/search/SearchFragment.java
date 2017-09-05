@@ -21,6 +21,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.OnEditorAction;
 import fr.iiie.android.simpsonsquotes.R;
 import fr.iiie.android.simpsonsquotes.bus.SnackEvent;
@@ -28,13 +29,19 @@ import fr.iiie.android.simpsonsquotes.bus.SwitchFragmentEvent;
 import fr.iiie.android.simpsonsquotes.business.search.SearchController;
 import fr.iiie.android.simpsonsquotes.data.app.App;
 import fr.iiie.android.simpsonsquotes.data.bus.SearchDataReadyEvent;
-import fr.iiie.android.simpsonsquotes.data.model.QuoteResultModel;
+import fr.iiie.android.simpsonsquotes.data.model.QuoteSearchModel;
 import fr.iiie.android.simpsonsquotes.ui.fragment.details.DetailsFragment;
 
 public class SearchFragment extends Fragment
 {
     @BindView(R.id.fragment_search_editText)
     EditText searchEditText;
+
+    @OnClick(R.id.fragment_search_randomButton)
+    private void onRandomButtonClick()
+    {
+
+    }
 
     @BindView(R.id.fragment_search_tableLayout)
     TableLayout resultsTableLayout;
@@ -95,7 +102,7 @@ public class SearchFragment extends Fragment
     {
         if (event.getMyQuoteResultsListModel() != null)
         {
-            for (final QuoteResultModel quote : event.getMyQuoteResultsListModel())
+            for (final QuoteSearchModel quote : event.getMyQuoteResultsListModel())
             {
                 TableRow tableRow = new TableRow(getContext());
                 tableRow.setLayoutParams(resultsTableLayout.getLayoutParams());

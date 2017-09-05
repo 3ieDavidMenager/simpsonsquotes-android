@@ -3,7 +3,7 @@ package fr.iiie.android.simpsonsquotes.data.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class QuoteResultModel
+public class QuoteSearchModel
 {
     @Expose
     @SerializedName("Id")
@@ -18,9 +18,9 @@ public class QuoteResultModel
     int timestamp;
 
 
-    public QuoteResultModel()
+    public QuoteSearchModel()
     {
-
+        //Mandatory constructor
     }
 
     public int getId()
