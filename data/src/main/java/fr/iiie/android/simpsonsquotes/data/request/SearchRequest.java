@@ -1,12 +1,10 @@
 package fr.iiie.android.simpsonsquotes.data.request;
 
-import com.activeandroid.util.Log;
-
 import java.util.List;
 
 import fr.iiie.android.simpsonsquotes.data.app.App;
 import fr.iiie.android.simpsonsquotes.data.bus.SearchDataReadyEvent;
-import fr.iiie.android.simpsonsquotes.data.model.QuoteResult;
+import fr.iiie.android.simpsonsquotes.data.model.QuoteResultModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -15,10 +13,10 @@ import retrofit2.Response;
 public class SearchRequest
 {
 
-    private static final Callback<List<QuoteResult>> searchResponseCallback = new Callback<List<QuoteResult>>()
+    private static final Callback<List<QuoteResultModel>> searchResponseCallback = new Callback<List<QuoteResultModel>>()
     {
         @Override
-        public void onResponse(Call<List<QuoteResult>> call, Response<List<QuoteResult>> response)
+        public void onResponse(Call<List<QuoteResultModel>> call, Response<List<QuoteResultModel>> response)
         {
             if (response.code() == 200)
             {
@@ -27,7 +25,7 @@ public class SearchRequest
         }
 
         @Override
-        public void onFailure(Call<List<QuoteResult>> call, Throwable t)
+        public void onFailure(Call<List<QuoteResultModel>> call, Throwable t)
         {
             App.getCoreBus().post(new SearchDataReadyEvent(null));
         }

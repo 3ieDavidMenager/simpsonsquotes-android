@@ -9,13 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.w3c.dom.Text;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,7 +27,7 @@ import fr.iiie.android.simpsonsquotes.bus.SnackEvent;
 import fr.iiie.android.simpsonsquotes.business.search.SearchController;
 import fr.iiie.android.simpsonsquotes.data.app.App;
 import fr.iiie.android.simpsonsquotes.data.bus.SearchDataReadyEvent;
-import fr.iiie.android.simpsonsquotes.data.model.QuoteResult;
+import fr.iiie.android.simpsonsquotes.data.model.QuoteResultModel;
 
 public class SearchFragment extends Fragment
 {
@@ -90,15 +92,15 @@ public class SearchFragment extends Fragment
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onSearchDataReadyEvent(SearchDataReadyEvent event)
     {
-        if (event.getMyQuoteResultsList() != null)
+        if (event.getMyQuoteResultsListModel() != null)
         {
-            for (QuoteResult quote : event.getMyQuoteResultsList())
+            for (QuoteResultModel quote : event.getMyQuoteResultsListModel())
             {
                 TableRow tableRow = new TableRow(getContext());
                 tableRow.setLayoutParams(tableLayout.getLayoutParams());
 
                 TableRow.LayoutParams params = new TableRow.LayoutParams(
-                        tableLayout.getWidth() / 3,
+                        tableLayout.getWidth() / 4,
                         TableRow.LayoutParams.WRAP_CONTENT
                 );
 
@@ -119,9 +121,15 @@ public class SearchFragment extends Fragment
                 String quote_timestamp = Integer.toString(quote.getTimestamp());
                 timestamp_textView.setText(quote_timestamp);
 
+                ImageView small_imageView = new ImageView(getContext());
+                small_imageView.setLayoutParams(params);
+                String image_url = "https://frinkiac.com/img/" + quote.getEpisode() + "/" + quote_timestamp + "/small.jpg";
+                Glide.with(this).load(image_url).into(small_imageView);
+
                 tableRow.addView(id_textView);
                 tableRow.addView(episode_textView);
                 tableRow.addView(timestamp_textView);
+                tableRow.addView(small_imageView);
 
                 tableLayout.addView(tableRow);
             }

@@ -2,20 +2,20 @@ package fr.iiie.android.simpsonsquotes.data.bus;
 
 import java.util.List;
 
-import fr.iiie.android.simpsonsquotes.data.model.QuoteResult;
+import fr.iiie.android.simpsonsquotes.data.model.QuoteResultModel;
 
 public class SearchDataReadyEvent
 {
-    private List<QuoteResult> myQuoteResultsList;
+    private List<QuoteResultModel> myQuoteResultsListModel;
 
-    public SearchDataReadyEvent(List<QuoteResult> myQuoteResultsList)
+    public SearchDataReadyEvent(List<QuoteResultModel> myQuoteResultsListModel)
     {
 
-        this.myQuoteResultsList = myQuoteResultsList;
+        this.myQuoteResultsListModel = myQuoteResultsListModel;
     }
 
-    public List<QuoteResult> getMyQuoteResultsList()
+    public List<QuoteResultModel> getMyQuoteResultsListModel()
     {
-        return myQuoteResultsList;
+        return myQuoteResultsListModel;
     }
 }
