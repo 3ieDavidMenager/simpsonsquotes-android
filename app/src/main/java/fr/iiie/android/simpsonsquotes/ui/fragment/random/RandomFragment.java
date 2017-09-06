@@ -114,10 +114,12 @@ public class RandomFragment extends Fragment
             RandomQuoteModel response = event.getRandomQuoteModel();
             RandomQuoteModel.Episode episode = response.getEpisode();
             episodeTitleText.setText(episode.getTitle());
+            // TODO magical strings
             episodeNumberText.setText("Season " + episode.getSeason() + ", Episode " + episode.getEpisodeNumber());
 
             QuoteSearchModel frame = response.getFrame();
 
+            // TODO magical string
             String image_url = "https://frinkiac.com/img/" + frame.getEpisode() + "/" + frame.getTimestamp() + "/large.jpg";
             Glide.with(this).load(image_url).into(episodeImage);
 

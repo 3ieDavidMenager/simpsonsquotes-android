@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- TODO useless nested linear layout -->
     <LinearLayout
         android:id="@+id/fragment_search_searchBarLayout"
         android:layout_width="match_parent"
@@ -42,6 +43,7 @@
         android:visibility="gone"
         />
 
+    <!-- TODO use Recyclerview -->
     <ScrollView
         android:id="@+id/fragment_search_scrollView"
         android:layout_width="match_parent"

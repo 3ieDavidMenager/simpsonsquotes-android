@@ -4,6 +4,7 @@ import org.parceler.Parcel;
 
 import fr.iiie.android.simpsonsquotes.data.model.RandomQuoteModel;
 
+// TODO RandomDataReadyEvent is a parcel ?
 @Parcel
 public class RandomDataReadyEvent
 {
@@ -16,7 +17,7 @@ public class RandomDataReadyEvent
 
     public RandomDataReadyEvent()
     {
-
+        // TODO use comments in empty constructor
     }
 
     public RandomQuoteModel getRandomQuoteModel()

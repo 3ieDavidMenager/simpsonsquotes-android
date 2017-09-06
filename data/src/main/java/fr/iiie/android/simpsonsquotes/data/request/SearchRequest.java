@@ -29,6 +29,7 @@ public class SearchRequest
         @Override
         public void onFailure(Call<List<QuoteSearchModel>> call, Throwable t)
         {
+            // TODO use a dedicated event for failure (or enhanced dataready event)
             App.getCoreBus().post(new SearchDataReadyEvent(null));
         }
     };

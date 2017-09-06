@@ -19,6 +19,7 @@
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
+    <!-- TODO use tools namespace to show fake layout content in preview -->
     <TextView
         android:id="@+id/fragment_details_idText"
         android:layout_width="wrap_content"

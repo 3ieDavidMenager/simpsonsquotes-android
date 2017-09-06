@@ -41,6 +41,7 @@ public class DetailsFragment extends Fragment
 
         ButterKnife.bind(this, rootView);
 
+        // TODO instead of concatenating multiple String objects, either use StringBuilder, or insert parameters in string resources
         String episode = getString(R.string.episode) + ": " + this.getArguments().getString("episode");
         String timestamp = getString(R.string.timestamp) + ": " + this.getArguments().getString("timestamp");
         String id = getString(R.string.id) + ": " + this.getArguments().getString("id");
@@ -48,9 +49,11 @@ public class DetailsFragment extends Fragment
         timestampText.setText(timestamp);
         idText.setText(id);
 
+        // TODO magical string
         String image_url = "https://frinkiac.com/img/" + this.getArguments().getString("episode") + "/" + this.getArguments().getString("timestamp") + "/large.jpg";
         Glide.with(this).load(image_url).into(episodeLargeImage);
 
+        // TODO progressbar with no loading or no progress ?
         detailsProgressBar.setVisibility(View.GONE);
         return rootView;
     }
