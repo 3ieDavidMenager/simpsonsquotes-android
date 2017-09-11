@@ -42,24 +42,22 @@
         android:visibility="gone"
         />
 
-    <!-- TODO use Recyclerview -->
     <ScrollView
         android:id="@+id/fragment_search_scrollView"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragment_search_editText"
         android:layout_margin="8dp">
 
-        <TableLayout
-            android:id="@+id/fragment_search_tableLayout"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/fragment_search_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:divider="?android:attr/dividerHorizontal"
-            android:showDividers="middle"
+            android:scrollbars="vertical"
             >
-        </TableLayout>
+        </android.support.v7.widget.RecyclerView>
     </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

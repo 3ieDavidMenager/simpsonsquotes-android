@@ -20,6 +20,12 @@ public class QuoteSearchModel
     @SerializedName("Timestamp")
     int timestamp;
 
+    public QuoteSearchModel(int id, String episode, int timestamp)
+    {
+        this.id = id;
+        this.episode = episode;
+        this.timestamp = timestamp;
+    }
 
     public QuoteSearchModel()
     {
