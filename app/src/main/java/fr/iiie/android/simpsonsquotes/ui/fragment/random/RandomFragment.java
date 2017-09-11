@@ -1,5 +1,6 @@
 package fr.iiie.android.simpsonsquotes.ui.fragment.random;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -119,7 +124,25 @@ public class RandomFragment extends Fragment
             QuoteSearchModel frame = response.getFrame();
 
             String image_url = getString(R.string.img_url, frame.getEpisode(), Integer.toString(frame.getTimestamp()), large_image);
-            Glide.with(this).load(image_url).into(episodeImage);
+            Glide.with(this)
+                    .load(image_url)
+                    .listener(new RequestListener<Drawable>()
+                    {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource)
+                        {
+                            randomProgressBar.setVisibility(View.GONE);
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource)
+                        {
+                            randomProgressBar.setVisibility(View.GONE);
+                            return false;
+                        }
+                    })
+                    .into(episodeImage);
 
             String subtitlesString = "";
             List<RandomQuoteModel.Subtitles> subtitles = response.getSubtitles();
@@ -130,11 +153,10 @@ public class RandomFragment extends Fragment
             }
 
             episodeSubtitlesText.setText(subtitlesString);
-            randomProgressBar.setVisibility(View.GONE);
         }
         else
         {
-            App.getAppBus().post(new SnackEvent("Error or no network"));
+            App.getAppBus().post(new SnackEvent(event.getError_msg()));
         }
     }
 

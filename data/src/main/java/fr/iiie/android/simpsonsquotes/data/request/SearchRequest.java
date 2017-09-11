@@ -29,8 +29,7 @@ public class SearchRequest
         @Override
         public void onFailure(Call<List<QuoteSearchModel>> call, Throwable t)
         {
-            // TODO use a dedicated event for failure (or enhanced dataready event)
-            App.getCoreBus().post(new SearchDataReadyEvent(null));
+            App.getCoreBus().post(new SearchDataReadyEvent(null, "Error while receiving search response"));
         }
     };
 
@@ -42,7 +41,7 @@ public class SearchRequest
         }
         else
         {
-            App.getCoreBus().post(new SearchDataReadyEvent(null));
+            App.getCoreBus().post(new SearchDataReadyEvent(null, "Error getting search response"));
         }
     }
 
@@ -60,7 +59,7 @@ public class SearchRequest
         @Override
         public void onFailure(Call<RandomQuoteModel> call, Throwable t)
         {
-            App.getCoreBus().post(new RandomDataReadyEvent(null));
+            App.getCoreBus().post(new RandomDataReadyEvent(null, "Error while receiving random response"));
         }
     };
 
@@ -72,7 +71,7 @@ public class SearchRequest
         }
         else
         {
-            App.getCoreBus().post(new RandomDataReadyEvent(null));
+            App.getCoreBus().post(new RandomDataReadyEvent(null, "Error getting random response"));
         }
     }
 

@@ -120,7 +120,7 @@ public class SearchFragment extends Fragment
         }
         else
         {
-            App.getAppBus().post(new SnackEvent("Error or no network"));
+            App.getAppBus().post(new SnackEvent(event.getError_msg()));
             searchProgressBar.setVisibility(View.GONE);
         }
     }

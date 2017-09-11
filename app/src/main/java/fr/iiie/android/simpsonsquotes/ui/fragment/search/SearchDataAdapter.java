@@ -1,15 +1,22 @@
 package fr.iiie.android.simpsonsquotes.ui.fragment.search;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 
 import java.util.List;
 import java.util.Locale;
@@ -66,6 +73,7 @@ class SearchDataAdapter extends RecyclerView.Adapter<SearchDataAdapter.ViewHolde
         ImageView imageView;
         Context context;
         QuoteSearchModel currentItem;
+        ProgressBar progressBar;
 
 
         ViewHolder(View itemView, Context context)
@@ -76,6 +84,7 @@ class SearchDataAdapter extends RecyclerView.Adapter<SearchDataAdapter.ViewHolde
             episodeText = (TextView) itemView.findViewById(R.id.fragment_search_item_episodeText);
             timestampText = (TextView) itemView.findViewById(R.id.fragment_search_item_timestampText);
             imageView = (ImageView) itemView.findViewById(R.id.fragment_search_item_image);
+            progressBar = (ProgressBar) itemView.findViewById(R.id.fragment_search_item_progressBar);
 
             itemView.setOnClickListener(new View.OnClickListener()
             {
@@ -95,16 +104,33 @@ class SearchDataAdapter extends RecyclerView.Adapter<SearchDataAdapter.ViewHolde
 
         void display(QuoteSearchModel item)
         {
+            String small_image = "small.jpg";
             String id = String.format(Locale.getDefault(), "%d", item.getId());
             idText.setText(id);
             String timestamp = String.format(Locale.getDefault(), "%d", item.getTimestamp());
             episodeText.setText(item.getEpisode());
             timestampText.setText(timestamp);
-            String img_url = context.getString(R.string.img_url, item.getEpisode(), timestamp, "small.jpg");
+            String img_url = context.getString(R.string.img_url, item.getEpisode(), timestamp, small_image);
             currentItem = item;
 
             Glide.with(context)
                     .load(img_url)
+                    .listener(new RequestListener<Drawable>()
+                    {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource)
+                        {
+                            progressBar.setVisibility(View.GONE);
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource)
+                        {
+                            progressBar.setVisibility(View.GONE);
+                            return false;
+                        }
+                    })
                     .into(imageView);
         }
     }
