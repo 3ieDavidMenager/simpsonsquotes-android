@@ -8,9 +8,13 @@
     <string name="search_hint">Enter your search</string>
 
     <!-- Fragment details -->
+    <string name="id_value">Id: %1$s</string>
+    <string name="episode_value">Episode: %1$s</string>
+    <string name="timestamp_value">Timestamp: %1$s</string>
     <string name="id">Id</string>
     <string name="episode">Episode</string>
     <string name="timestamp">Timestamp</string>
+    <string name="img_url">https://frinkiac.com/img/%1$s/%2$s/%3$s</string>
 
     <!-- Fragment search -->
     <string name="random">Random</string>

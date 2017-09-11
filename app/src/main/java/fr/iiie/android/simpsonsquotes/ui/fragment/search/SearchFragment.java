@@ -202,6 +202,9 @@ public class SearchFragment extends Fragment
                 // TODO do not hardcode "magical values". Or at least use constants.
                 String image_url = "https://frinkiac.com/img/" + quote.getEpisode() + "/" + quote_timestamp + "/small.jpg";
                 // TODO when loading with Glide, apply RequestOptions object with .placeholder(), .error() methods (and maybe resizing, transform...)
+                Glide.with(this)
+                        .load(image_url)
+                        .into(small_imageView);
 
                 tableRow.addView(id_textView);
                 tableRow.addView(episode_textView);

@@ -1,5 +1,6 @@
 package fr.iiie.android.simpsonsquotes.ui.fragment.details;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,20 +46,40 @@ public class DetailsFragment extends Fragment
 
         ButterKnife.bind(this, rootView);
 
-        // TODO instead of concatenating multiple String objects, either use StringBuilder, or insert parameters in string resources
-        String episode = getString(R.string.episode) + ": " + this.getArguments().getString("episode");
-        String timestamp = getString(R.string.timestamp) + ": " + this.getArguments().getString("timestamp");
-        String id = getString(R.string.id) + ": " + this.getArguments().getString("id");
-        episodeText.setText(episode);
-        timestampText.setText(timestamp);
+        Bundle arguments = this.getArguments();
+
+        final String large_img = "large.jpg";
+        final String episode = arguments.getString("episode");
+        final String timestamp = arguments.getString("timestamp");
+
+        String episode_value = getString(R.string.episode_value, episode);
+        String timestamp_value = getString(R.string.timestamp_value, timestamp);
+        String id = getString(R.string.id_value, arguments.getString("id"));
+        episodeText.setText(episode_value);
+        timestampText.setText(timestamp_value);
         idText.setText(id);
 
-        // TODO magical string
-        String image_url = "https://frinkiac.com/img/" + this.getArguments().getString("episode") + "/" + this.getArguments().getString("timestamp") + "/large.jpg";
-        Glide.with(this).load(image_url).into(episodeLargeImage);
+        String image_url = getString(R.string.img_url, episode, timestamp, large_img);
+        Glide.with(this)
+            .load(image_url)
+                .listener(new RequestListener<Drawable>()
+                {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource)
+                    {
+                        detailsProgressBar.setVisibility(View.GONE);
+                        return false;
+                    }
 
-        // TODO progressbar with no loading or no progress ?
-        detailsProgressBar.setVisibility(View.GONE);
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource)
+                    {
+                        detailsProgressBar.setVisibility(View.GONE);
+                        return false;
+                    }
+                })
+            .into(episodeLargeImage);
+
         return rootView;
     }
 }
