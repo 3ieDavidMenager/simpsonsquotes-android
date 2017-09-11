@@ -16,7 +16,6 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.parceler.Parcels;
 
-import java.io.Serializable;
 import java.util.List;
 
 import butterknife.BindView;
@@ -34,7 +33,7 @@ import fr.iiie.android.simpsonsquotes.data.request.SearchRequest;
 public class RandomFragment extends Fragment
 {
 
-    RandomDataReadyEvent event;
+    RandomQuoteModel randomData;
 
     private SearchController searchController;
 
@@ -68,8 +67,8 @@ public class RandomFragment extends Fragment
             SearchRequest.getRandomQuote();
         else
         {
-            RandomDataReadyEvent savedEvent = Parcels.unwrap(savedInstanceState.getParcelable("event"));
-            onRandomDataReadyEvent(savedEvent);
+            RandomQuoteModel quoteModel = Parcels.unwrap(savedInstanceState.getParcelable("randomData"));
+            onRandomDataReadyEvent(new RandomDataReadyEvent(quoteModel));
         }
         searchController = new SearchController();
 
@@ -80,7 +79,7 @@ public class RandomFragment extends Fragment
     public void onSaveInstanceState(Bundle outState)
     {
         super.onSaveInstanceState(outState);
-        outState.putParcelable("event", Parcels.wrap(event));
+        outState.putParcelable("randomData", Parcels.wrap(randomData));
     }
 
     @Override
@@ -110,17 +109,16 @@ public class RandomFragment extends Fragment
     {
         if (event.getRandomQuoteModel() != null)
         {
-            this.event = event;
+            final String large_image = "large.jpg";
+            this.randomData = event.getRandomQuoteModel();
             RandomQuoteModel response = event.getRandomQuoteModel();
             RandomQuoteModel.Episode episode = response.getEpisode();
             episodeTitleText.setText(episode.getTitle());
-            // TODO magical strings
-            episodeNumberText.setText("Season " + episode.getSeason() + ", Episode " + episode.getEpisodeNumber());
+            episodeNumberText.setText(getString(R.string.episode_number, episode.getSeason(), episode.getEpisodeNumber()));
 
             QuoteSearchModel frame = response.getFrame();
 
-            // TODO magical string
-            String image_url = "https://frinkiac.com/img/" + frame.getEpisode() + "/" + frame.getTimestamp() + "/large.jpg";
+            String image_url = getString(R.string.img_url, frame.getEpisode(), Integer.toString(frame.getTimestamp()), large_image);
             Glide.with(this).load(image_url).into(episodeImage);
 
             String subtitlesString = "";
