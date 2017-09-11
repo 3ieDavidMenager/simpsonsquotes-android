@@ -12,19 +12,19 @@ public class RandomQuoteModel
 {
     @Expose
     @SerializedName("Episode")
-    Episode episode;
+    private Episode episode;
 
     @Expose
     @SerializedName("Frame")
-    QuoteSearchModel frame;
+    private QuoteSearchModel frame;
 
     @Expose
     @SerializedName("Subtitles")
-    List<Subtitles> subtitles;
+    private List<Subtitles> subtitles;
 
     @Expose
     @SerializedName("Nearby")
-    List<QuoteSearchModel> nearby;
+    private List<QuoteSearchModel> nearby;
 
     public Episode getEpisode()
     {

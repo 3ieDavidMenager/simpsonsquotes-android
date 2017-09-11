@@ -10,15 +10,15 @@ public class QuoteSearchModel
 {
     @Expose
     @SerializedName("Id")
-    int id;
+    private int id;
 
     @Expose
     @SerializedName("Episode")
-    String episode;
+    private String episode;
 
     @Expose
     @SerializedName("Timestamp")
-    int timestamp;
+    private int timestamp;
 
     public QuoteSearchModel(int id, String episode, int timestamp)
     {
